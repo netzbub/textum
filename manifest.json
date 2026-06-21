@@ -1,11 +1,10 @@
 {
-	"id": "icloud-contacts",
-	"name": "iCloud Contacts",
+	"id": "apple-contacts-relations-sync",
+	"name": "Apple Contacts Relations Sync",
 	"version": "0.4.15",
 	"minAppVersion": "0.15.8",
-	"description": "Imports contacts from iCloud and manages a note for each contact.",
-	"author": "Truls Aagaard",
-	"authorUrl": "trulsaagaard.com",
-	"fundingUrl": "https://www.buymeacoffee.com/truls",
+	"description": "Sync macOS/iCloud Contacts into your vault as structured notes and turn contact relationships (family, projects, company) into queryable, visualisable data.",
+	"author": "netzbub",
+	"authorUrl": "https://github.com/netzbub",
 	"isDesktopOnly": false
 }

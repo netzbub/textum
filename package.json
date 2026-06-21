@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-icloud-contacts",
+	"name": "apple-contacts-relations-sync",
 	"version": "0.4.15",
-	"description": "Imports contacts from iCloud and manages a note for each contact.",
+	"description": "Sync macOS/iCloud Contacts into your vault as structured notes and turn contact relationships (family, projects, company) into queryable, visualisable data.",
 	"main": "main.js",
 	"scripts": {
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
@@ -12,8 +12,8 @@
 		"deploy": "npm version patch && git push && git push --tags"
 	},
 	"keywords": [],
-	"author": "",
-	"license": "GPL-3.0",
+	"author": "netzbub",
+	"license": "AGPL-3.0",
 	"dependencies": {
 		"@types/node": "^22.13.0",
 		"@types/vcf": "^2.0.7",
