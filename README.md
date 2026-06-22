@@ -2,13 +2,11 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/dynamic/json?label=manifest&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fnetzbub%2FApple-Contacts-Relations-to-Obsidian-Sync%2Fmain%2Fmanifest.json&color=blue" alt="manifest version">
+  <img src="https://img.shields.io/github/release-date/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync?color=olive" alt="release date">
   <img src="https://img.shields.io/github/license/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync" alt="license">
+  <img src="https://img.shields.io/github/downloads/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync/total?color=blueviolet" alt="downloads">
   <img src="https://img.shields.io/github/issues/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync?color=yellow" alt="open issues">
 </p>
-<!-- Re-add once the first GitHub Release exists (until then these render as "no release"/0):
-  <img src="https://img.shields.io/github/v/release/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync" alt="latest release">
-  <img src="https://img.shields.io/github/downloads/netzbub/Apple-Contacts-Relations-to-Obsidian-Sync/total" alt="downloads">
--->
 
 Sync macOS / iCloud Contacts into Obsidian as clean, well-structured Markdown notes —
 and turn the **relationships** that already live in your address book (family, project
