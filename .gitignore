@@ -21,6 +21,7 @@ data.json
 # Exclude files
 README_old.md
 CLAUDE.md
+.claude
 
 # VS Code Local History extension
 .history/
