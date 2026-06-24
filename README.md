@@ -20,7 +20,7 @@ and turn the **relationships** that already live in your address book (family, p
 teams, company membership) into data you can query, chart and visualise inside Obsidian.
 
 <p align="center">
-<img src="images/Beatles.jpg" width="700" alt="...">  
+<img src="images/Beatles.jpg" width="100%" alt="...">  
 </p>
 
 ## Table of contents
@@ -33,6 +33,8 @@ teams, company membership) into data you can query, chart and visualise inside O
     - [Complete list of fields and how to use them](#complete-list-of-fields-and-how-to-use-them)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
+        - [Option A — BRAT recommended](#option-a--brat-recommended)
+        - [Option B — manual](#option-b--manual)
     - [Configuration plugin settings](#configuration-plugin-settings)
     - [Directory structure](#directory-structure)
     - [Usage](#usage)
@@ -71,7 +73,7 @@ Typical uses:
 ---
 
 <p align="center">
-<img src="images/contacts-example.jpg" width="550" alt="...">  
+<img src="images/contacts-example.jpg" width="75%" alt="...">  
 </p>
 
 ## What this fork adds (vs. Truls Aagaard's original)
