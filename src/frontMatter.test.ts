@@ -244,8 +244,8 @@ const testCases = [
 		],
 		{
 			addresses: [
-				{ street: "Home road 6", city: "Texas", postcode: "1234", country: "United States" },
-				{ street: "Work street 2", city: "Alta", postcode: "7896", country: "Norway" },
+				"Home road 6, 1234 Texas, United States",
+				"Work street 2, 7896 Alta, Norway",
 			],
 			name: "Full Name",
 		},
@@ -295,8 +295,8 @@ const testCases = [
 		],
 		{
 			addresses: [
-				{ label: "Hjemme", street: "Home road 6", city: "Texas", postcode: "1234", country: "United States" },
-				{ label: "Work", street: "Work street 2", city: "Alta", postcode: "7896", country: "Norway" },
+				"Hjemme: Home road 6, 1234 Texas, United States",
+				"Work: Work street 2, 7896 Alta, Norway",
 			],
 			name: "Full Name",
 		},
@@ -365,8 +365,8 @@ const testCases = [
 			},
 		],
 		{
-			parent: ["[[Test Nordmann]]"],
-			child: ["[[Test Nordmann]]"],
+			mother: ["[[Test Nordmann]]"],
+			children: ["[[Test Nordmann]]"],
 			name: "Full Name",
 		},
 		{
@@ -403,8 +403,8 @@ const testCases = [
 			},
 		],
 		{
-			parent: ["[[Test Nordmann]]"],
-			child: ["[[Test Nordmann]]"],
+			mother: ["[[Test Nordmann]]"],
+			children: ["[[Test Nordmann]]"],
 			name: "Full Name",
 		},
 		defaultSettings,

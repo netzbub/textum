@@ -1,4 +1,10 @@
-import { App, PluginSettingTab, Setting, TextComponent } from "obsidian";
+import {
+	App,
+	PluginSettingTab,
+	Setting,
+	TextComponent,
+	ToggleComponent,
+} from "obsidian";
 import ICloudContacts from "../main";
 import { ICloudVCard } from "./ICloudContactsApi";
 import { parseVCardToJCard } from "./parser";
@@ -259,50 +265,105 @@ export class SettingTab extends PluginSettingTab {
 
 				loadingWrapper.remove();
 
-				if (groups.length === 0) {
+				const groupEntries: { name: string; uid: string }[] = [];
+				for (const group of groups) {
+					const fnJCard = group.find((o) => o.key === "fn");
+					const uidJCard = group.find((o) => o.key === "uid");
+					if (
+						fnJCard &&
+						!Array.isArray(fnJCard.value) &&
+						uidJCard &&
+						!Array.isArray(uidJCard.value)
+					) {
+						groupEntries.push({
+							name: fnJCard.value as string,
+							uid: uidJCard.value as string,
+						});
+					}
+				}
+
+				if (groupEntries.length === 0) {
 					containerEl.createEl("p", {
 						text: "No groups found",
 					});
+					return;
 				}
 
-				if (groups.length > 0) {
-					for (const group of groups) {
-						const fnJCard = group.find((o) => o.key === "fn");
-						const uidJCard = group.find((o) => o.key === "uid");
+				const groupToggles: {
+					uid: string;
+					toggle: ToggleComponent;
+				}[] = [];
+				let masterToggle: ToggleComponent | null = null;
+				let bulkUpdating = false;
+				const allSelected = () =>
+					groupEntries.length > 0 &&
+					groupEntries.every((g) =>
+						this.plugin.settings.groups.includes(g.uid),
+					);
 
-						if (
-							fnJCard &&
-							!Array.isArray(fnJCard.value) &&
-							uidJCard &&
-							!Array.isArray(uidJCard.value)
-						) {
-							new Setting(containerEl)
-								.setName(fnJCard.value)
-								.addToggle((bool) =>
-									bool
-										.setValue(
-											this.plugin.settings.groups.includes(
-												uidJCard.value as string,
-											),
-										)
-										.onChange(async (value) => {
-											if (value) {
-												this.plugin.settings.groups.push(
-													uidJCard.value as string,
-												);
-											} else {
-												this.plugin.settings.groups =
-													this.plugin.settings.groups.filter(
-														(i) =>
-															i !==
-															(uidJCard.value as string),
-													);
-											}
-											await this.plugin.saveSettings();
-										}),
+				new Setting(containerEl)
+					.setName("Select all groups")
+					.setDesc("Turn every group below on or off at once")
+					.addToggle((bool) => {
+						masterToggle = bool;
+						bool.setValue(allSelected()).onChange(async (value) => {
+							if (bulkUpdating) return;
+							bulkUpdating = true;
+							this.plugin.settings.groups = value
+								? groupEntries.map((g) => g.uid)
+								: [];
+							await this.plugin.saveSettings();
+							for (const gt of groupToggles) {
+								gt.toggle.setValue(
+									this.plugin.settings.groups.includes(
+										gt.uid,
+									),
 								);
-						}
-					}
+							}
+							bulkUpdating = false;
+						});
+					});
+
+				for (const entry of groupEntries) {
+					new Setting(containerEl)
+						.setName(entry.name)
+						.addToggle((bool) => {
+							groupToggles.push({
+								uid: entry.uid,
+								toggle: bool,
+							});
+							bool
+								.setValue(
+									this.plugin.settings.groups.includes(
+										entry.uid,
+									),
+								)
+								.onChange(async (value) => {
+									if (bulkUpdating) return;
+									if (value) {
+										if (
+											!this.plugin.settings.groups.includes(
+												entry.uid,
+											)
+										) {
+											this.plugin.settings.groups.push(
+												entry.uid,
+											);
+										}
+									} else {
+										this.plugin.settings.groups =
+											this.plugin.settings.groups.filter(
+												(i) => i !== entry.uid,
+											);
+									}
+									await this.plugin.saveSettings();
+									if (masterToggle) {
+										bulkUpdating = true;
+										masterToggle.setValue(allSelected());
+										bulkUpdating = false;
+									}
+								});
+						});
 				}
 			})
 			.catch((error) => {

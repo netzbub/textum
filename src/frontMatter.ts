@@ -3,15 +3,6 @@ import { parseVCardToJCardAndFullName } from "./parser";
 import { labelToCanonical } from "./relationshipMapping";
 import { sanitizeFilename } from "./sanitize";
 
-type Address = {
-	label?: string;
-	street?: string;
-	city?: string;
-	state?: string;
-	postcode?: string;
-	country?: string;
-};
-
 export function createFrontmatter(
 	iCloudVCardData: string,
 	settings: {
@@ -154,19 +145,21 @@ function stripSocialValue(value: string) {
 
 function addAddresses(
 	value: string[],
-	o: { name: string; addresses?: Address[] },
+	o: { [key: string]: string[] | string | undefined },
 	label?: string,
 ) {
-	const address: Address = {};
-	if (label) address.label = label;
-	if (value[2]) address.street = value[2];
-	if (value[3]) address.city = value[3];
-	if (value[4]) address.state = value[4];
-	if (value[5]) address.postcode = value[5];
-	if (value[6]) address.country = value[6];
-	if (Array.isArray(o.addresses))
-		return { ...o, addresses: [...o.addresses, address] };
-	return { ...o, addresses: [address] };
+	const street = value[2] || "";
+	const postcode = value[5] || "";
+	const city = value[3] || "";
+	const postcodeCity = `${postcode} ${city}`.trim();
+	const state = value[4] || "";
+	const country = value[6] || "";
+	const line = [street, postcodeCity, state, country]
+		.filter(Boolean)
+		.join(", ");
+	if (!line) return o;
+	const formatted = label ? `${label}: ${line}` : line;
+	return addValueToArray("addresses", formatted, o);
 }
 
 function unescapeVCard(value: string): string {
