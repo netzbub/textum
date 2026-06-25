@@ -172,6 +172,10 @@ Not yet in the community store. Two ways to install:
   (China: `https://contacts.icloud.com.cn`; Nextcloud: the address-book share URL).
 - **Contacts folder** — vault folder for the notes (default `Contacts`).
 - **Labels toggles** — add labels to phone / email / url / related names / addresses.
+- **Write Charted Roots keys** — write `cr_type` (`person`, or `organization` for Apple
+  "Company" cards) and a stable `cr_id` (the Apple UID) to every contact, so the notes are
+  recognised by the Charted Roots plugin. On by default; turn off if you don't use Charted
+  Roots.
 - **Excluded keys** — space-delimited keys not written to frontmatter (raw data stays in
   `iCloudVCard`).
 - **Groups** — select which iCloud groups to sync, with a **Select all groups** master
@@ -315,7 +319,7 @@ Charted Roots project.
 | `cousin` / `cousine`, `uncle`, `aunt`, `nephew`, `niece`, `grandfather`, `grandmother` | custom relationship types | shown in Entity Profile (not drawn in the tree) |
 | `birthday` | `born` (via property alias) | birth date |
 | `death` | `died` (via property alias) | death date |
-| `organization` (plain text from Apple ORG) | — | mapping to Charted Roots' `organization` notes / `membership_*` arrays is manual for now (see *Known limitation*) |
+| `organization` (plain text from Apple ORG) | — | mapping to Charted Roots' `organization` notes / `membership_*` arrays is manual for now (see *Organisation hierarchies are Phase 2*, below) |
 
 Charted Roots stores family links as a wikilink plus an optional `<field>_id`; the bare
 wikilink textum writes is sufficient, and Charted Roots reconstructs the reverse direction
@@ -334,7 +338,9 @@ of each family edge itself.
 `#person` tag also work). textum writes `cr_type` and a stable `cr_id` (the Apple UID)
 automatically — controlled by the *Write Charted Roots keys* setting, on by default. Apple
 "Company" cards (`X-ABShowAs:COMPANY`) are written as `organization`, everyone else as
-`person`. Disable the setting if you don't use Charted Roots.
+`person`. Disable the setting if you don't use Charted Roots. Toggling this setting counts
+as a settings change, so the next *Update Contacts* run rewrites every note to add (or
+remove) the keys.
 
 **Organisation *hierarchies* are Phase 2.** Company cards are marked `cr_type:
 organization`, but Apple only provides the firm as a plain text string (`ORG`, written to
