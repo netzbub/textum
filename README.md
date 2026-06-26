@@ -419,4 +419,4 @@ AGPL-3.0; this fork uses AGPL-3.0 consistently.)
 - The CardDAV client (`iCloudClient`) is adapted from
   [tsdav](https://github.com/natelindev/tsdav).
 - Not affiliated with Apple in any way.
-- Concept and structure was optimized by Claude, the code was mostly done by Claude Code.
+- The idea and concept were mine; coordination, structuring and realisation grew out of close teamwork with Claude Opus 4.8; the code — where not still Truls' original work — was mostly written by Claude Code.
