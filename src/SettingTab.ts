@@ -108,7 +108,7 @@ export class SettingTab extends PluginSettingTab {
 		passwordSettingEl.addToggle((v) =>
 			v.onChange((value) => {
 				if (value) {
-					passwordInputEl.inputEl.setAttribute("type", "clear");
+					passwordInputEl.inputEl.setAttribute("type", "text");
 				} else {
 					passwordInputEl.inputEl.setAttribute("type", "password");
 				}
@@ -124,7 +124,7 @@ export class SettingTab extends PluginSettingTab {
 		);
 
 		new Setting(containerEl)
-			.setName("ICloud server URL")
+			.setName("iCloud server URL")
 			.setDesc(
 				"The URL of the iCloud server. Defaults to 'https://contacts.icloud.com'. Chinese users may need to change this to 'https://contacts.icloud.com.cn'",
 			)
@@ -153,7 +153,7 @@ export class SettingTab extends PluginSettingTab {
 
 		new Setting(containerEl).setName("Parameters").setHeading();
 		containerEl.createEl("small", {
-			text: "Remember to run Update Contacts after changing any of the following to have the changes take effect.",
+			text: "Remember to run Update contacts after changing any of the following to have the changes take effect.",
 		});
 
 		new Setting(containerEl)
@@ -238,7 +238,7 @@ export class SettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("Excluded keys")
 			.setDesc(
-				"A space delimited list of all the keys that should be excluded in the properties of each contact. The data will still be pressent under the iCloudVCard propertie",
+				"A space delimited list of all the keys that should be excluded in the properties of each contact. The data will still be present under the iCloudVCard property",
 			)
 			.addTextArea((text) =>
 				text
